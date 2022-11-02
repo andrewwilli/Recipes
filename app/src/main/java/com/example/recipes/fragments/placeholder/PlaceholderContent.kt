@@ -51,7 +51,7 @@ object PlaceholderContent {
     /**
      * A placeholder item representing a piece of content.
      */
-    data class PlaceholderItem(val id: String, val name: String, val details: String) {
+    data class PlaceholderItem(val id: String, val name: String, val duration: String) {
         override fun toString(): String = name
     }
 }

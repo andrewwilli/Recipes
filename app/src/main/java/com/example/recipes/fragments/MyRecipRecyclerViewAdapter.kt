@@ -38,7 +38,8 @@ class MyRecipRecyclerViewAdapter(
 
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val idView: TextView = binding.itemNumber
-        val nameView: TextView = binding.name
+        val nameView: TextView = binding.itemName
+        val durationView: TextView = binding.itemDuration
 
         override fun toString(): String {
             return super.toString() + " '" + nameView.text + "'"
