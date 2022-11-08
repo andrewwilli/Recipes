@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.recipes.R
+import com.example.recipes.RequestManager
 import com.example.recipes.fragments.placeholder.PlaceholderContent
+
 
 /**
  * A fragment representing a list of Items.
@@ -17,10 +19,10 @@ import com.example.recipes.fragments.placeholder.PlaceholderContent
 class RecipFragment : Fragment() {
 
     private var columnCount = 1
+    lateinit var manager : RequestManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
@@ -32,6 +34,8 @@ class RecipFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
+
+
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -40,6 +44,13 @@ class RecipFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
                 adapter = MyRecipRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                val x = PlaceholderContent.ITEMS
+
+                if (container != null) {
+                    manager = RequestManager(container.getContext(), adapter as MyRecipRecyclerViewAdapter)
+                }
+                println("Watch this: "+manager.getRandomRecipes2()?.size)
+
             }
         }
         return view

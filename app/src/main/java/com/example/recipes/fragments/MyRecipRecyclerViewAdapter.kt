@@ -13,7 +13,7 @@ import com.example.recipes.fragments.placeholder.PlaceholderContent.PlaceholderI
  * TODO: Replace the implementation with code for your data type.
  */
 class MyRecipRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private var values: List<PlaceholderItem>
 ) : RecyclerView.Adapter<MyRecipRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +35,11 @@ class MyRecipRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = values.size
+
+    fun setItems(values: List<PlaceholderItem>){
+        this.values = values
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val idView: TextView = binding.itemNumber
