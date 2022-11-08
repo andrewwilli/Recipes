@@ -1,11 +1,8 @@
 package com.example.recipes
 
 import android.content.Context
-import com.example.recipes.Listeners.RandomAPIResponseListener
 import com.example.recipes.model.RandomRecipeResponse
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -23,7 +20,12 @@ class RequestManager(context: Context) {
         this.context = context
     }
 
+fun getRandomRecipes(){
+
+}
+/*
     fun getRandomRecipes(listener: RandomAPIResponseListener, tags: List<String?>?) {
+
         val callRandomRecipe = retrofit.create(CallRandomRecipe::class.java)
         val call: Call<RandomRecipeResponse> =
             callRandomRecipe.callRandomRecipe(context.getString(R.string.api_key), "80", tags)
@@ -44,7 +46,9 @@ class RequestManager(context: Context) {
             }
         })
     }
-/*
+
+
+
     fun getRecipeDetails(listener: RecipeDetailsResponseListener, id: Int) {
         val callRecipeDetails = retrofit.create(CallRecipeDetails::class.java)
         val call: Call<RecipeDetailsResponse> =
