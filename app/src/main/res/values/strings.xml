@@ -105,4 +105,6 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="api_key">80e4276aeedc4c0c963addb5d27af1e0</string>
 </resources>

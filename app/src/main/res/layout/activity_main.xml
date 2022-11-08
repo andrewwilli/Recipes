@@ -31,7 +31,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView4"
-        android:name="com.example.recipes.fragments.RecipFragment"
+        android:name="com.example.recipes.fragments.RecipeFragment"
         android:layout_width="409dp"
         android:layout_height="556dp"
         app:layout_constraintBottom_toBottomOf="parent"
