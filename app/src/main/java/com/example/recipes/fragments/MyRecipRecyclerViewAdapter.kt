@@ -1,19 +1,21 @@
 package com.example.recipes.fragments
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.databinding.FragmentItemBinding
-
 import com.example.recipes.fragments.placeholder.PlaceholderContent.PlaceholderItem
+import com.example.recipes.model.RandomRecipe
+import com.squareup.picasso.Picasso
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class MyRecipRecyclerViewAdapter(
-    private var values: List<PlaceholderItem>
+    private var values: List<RandomRecipe>
 ) : RecyclerView.Adapter<MyRecipRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,18 +27,18 @@ class MyRecipRecyclerViewAdapter(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.nameView.text = item.name
+        holder.nameView.text = item.title
+        holder.readyInMinutes.text = item.readyInMinutes + " Min"
+        Picasso.get().load(item.image).into(holder.imageView)
     }
 
     override fun getItemCount(): Int = values.size
 
-    fun setItems(values: List<PlaceholderItem>){
+    fun setItems(values: List<RandomRecipe>){
         this.values = values
         notifyDataSetChanged()
     }
@@ -44,7 +46,8 @@ class MyRecipRecyclerViewAdapter(
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val idView: TextView = binding.itemNumber
         val nameView: TextView = binding.itemName
-        val durationView: TextView = binding.itemDuration
+        val readyInMinutes: TextView = binding.itemDuration
+        val imageView: ImageView = binding.itemImage
 
         override fun toString(): String {
             return super.toString() + " '" + nameView.text + "'"

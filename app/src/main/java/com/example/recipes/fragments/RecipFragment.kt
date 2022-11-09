@@ -1,13 +1,13 @@
 package com.example.recipes.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.recipes.R
 import com.example.recipes.RequestManager
 import com.example.recipes.fragments.placeholder.PlaceholderContent
@@ -43,13 +43,13 @@ class RecipFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRecipRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                adapter = MyRecipRecyclerViewAdapter(emptyList())
                 val x = PlaceholderContent.ITEMS
 
                 if (container != null) {
                     manager = RequestManager(container.getContext(), adapter as MyRecipRecyclerViewAdapter)
+                    manager.getRandomRecipes2()
                 }
-                println("Watch this: "+manager.getRandomRecipes2()?.size)
 
             }
         }

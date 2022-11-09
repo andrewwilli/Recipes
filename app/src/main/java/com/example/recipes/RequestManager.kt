@@ -5,13 +5,10 @@ import android.util.Log
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.recipes.fragments.MyRecipRecyclerViewAdapter
-import com.example.recipes.fragments.placeholder.PlaceholderContent
 import com.example.recipes.model.RandomRecipe
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONException
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.decodeFromStream
 
 
 class RequestManager(context: Context, adapter: MyRecipRecyclerViewAdapter) {
@@ -40,7 +37,6 @@ class RequestManager(context: Context, adapter: MyRecipRecyclerViewAdapter) {
 //                    val gson = GsonBuilder().create()
 //                    val theList = gson.fromJson<ArrayList<String>>(response, object :
 //                        TypeToken<ArrayList<String>>() {}.type)
-//
 //                    if (response != null) {
 ////                        val listTest: RecipeList = json.decodeFromString<RecipeList>(response)
 //                    }
@@ -56,23 +52,24 @@ class RequestManager(context: Context, adapter: MyRecipRecyclerViewAdapter) {
 //        requestQueue.add(myRequest)
     }
 
-    fun getRandomRecipes2(): List<RandomRecipe>? {
-        val url = "https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert&apiKey=80e4276aeedc4c0c963addb5d27af1e0"
-        var recipes: List<RandomRecipe>? = null
+    fun getRandomRecipes2(){
+
+        val url = "https://api.spoonacular.com/recipes/random?number=4&tags=vegetarian,dessert&apiKey=80e4276aeedc4c0c963addb5d27af1e0"
+
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
                     val typeToken = object : TypeToken<List<RandomRecipe>>() {}.type
-                    recipes = Gson().fromJson<List<RandomRecipe>>(response.getString("recipes"), typeToken)
-
+                    val recipes = Gson().fromJson<List<RandomRecipe>>(response.getString("recipes"), typeToken)
+                    adapter.setItems(recipes)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             }
         ) { error -> Log.e("LOG", error.toString()) }
         val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(jsonObjectRequest)
 
-        return recipes
     }
 
 

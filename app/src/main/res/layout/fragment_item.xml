@@ -12,33 +12,38 @@
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/item_image"
         app:layout_constraintEnd_toStartOf="@+id/item_name"
         app:layout_constraintHorizontal_bias="0.318"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="69dp"
+        android:layout_width="match_parent"
         android:layout_height="22dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="52dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="51sp"
+        android:autoSizeStepGranularity="2sp"
         app:layout_constraintEnd_toStartOf="@+id/item_duration"
+        app:layout_constraintEnd_toEndOf="@id/item_duration"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_duration"
         android:layout_width="69dp"
         android:layout_height="22dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        app:layout_constraintBottom_toTopOf="@+id/item_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/item_image"
         android:layout_width="373dp"
         android:layout_height="258dp"
         android:layout_marginTop="12dp"
