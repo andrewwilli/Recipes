@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipes.databinding.FragmentItemCardviewBinding
+import com.example.recipes.databinding.FragmentItemBinding
 import com.example.recipes.fragments.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.recipes.model.RandomRecipe
 import com.squareup.picasso.Picasso
@@ -14,14 +14,13 @@ import com.squareup.picasso.Picasso
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyRecipRecyclerViewAdapter(
-    private var values: List<RandomRecipe>
-) : RecyclerView.Adapter<MyRecipRecyclerViewAdapter.ViewHolder>() {
+class MyRecipeRecyclerViewAdapter(
+    private var values: MutableList<RandomRecipe>
+) : RecyclerView.Adapter<MyRecipeRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(
-            FragmentItemCardviewBinding.inflate(
+            FragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,12 +37,21 @@ class MyRecipRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    fun setItems(values: List<RandomRecipe>){
+    fun setItems(values: MutableList<RandomRecipe>){
         this.values = values
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(binding: FragmentItemCardviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun appendItems(values: List<RandomRecipe>) {
+        this.values.addAll(values)
+        notifyDataSetChanged()
+    }
+
+    fun getItems(): List<RandomRecipe> {
+        return values
+    }
+
+    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
        // val idView: TextView = binding.itemNumber
         val nameView: TextView = binding.itemName
         val readyInMinutes: TextView = binding.itemDuration
