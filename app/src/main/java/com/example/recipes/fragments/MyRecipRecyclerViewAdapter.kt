@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipes.databinding.FragmentItemCardviewBinding
+import com.example.recipes.databinding.FragmentItemBinding
 import com.example.recipes.fragments.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.recipes.model.RandomRecipe
 import com.squareup.picasso.Picasso
@@ -21,7 +21,7 @@ class MyRecipRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentItemCardviewBinding.inflate(
+            FragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -43,7 +43,7 @@ class MyRecipRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(binding: FragmentItemCardviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
        // val idView: TextView = binding.itemNumber
         val nameView: TextView = binding.itemName
         val readyInMinutes: TextView = binding.itemDuration

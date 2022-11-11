@@ -13,7 +13,36 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="ready_in_15_min">15 Min</string>
+    <string name="ingredients">    *   3 tablespoons unsalted butter
+    *   ½ cup finely diced yellow onion
+    *   1 ½ teaspoons kosher salt, divided
+    *   3 tablespoons all-purpose flour
+    *   4 cups cold milk
+    *   1 cup shredded white Cheddar cheese
+    *   1 (12 ounce) package dry egg noodles
+    *   2 (5.5 ounce) cans tuna packed in olive oil, drained
+    *   1 pinch cayenne pepper
+    *   ¼ teaspoon freshly ground black pepper
+    *   ¼ teaspoon Worcestershire sauce
+    *   ½ cup plain bread crumbs
+    *   ½ cup grated Parmigiano-Reggiano cheese
+    *   2 tablespoons olive oil
+    </string>
+
+<string name="instructions">
+<b>Step 1</b>\nPreheat the oven to 375 degrees F (190 degrees C). Lightly butter a 9x13-inch casserole dish."
+\n<b>Step 2</b>\nMelt 3 tablespoons butter in a medium saucepan over medium heat. Saute onion with 1/2 teaspoon kosher salt until it starts to soften up and turn translucent, 3 to 4 minutes. Add the flour, and cook, stirring, for 3 minutes, reducing heat if needed.
+\n<b>Step 3</b>\nPour in cold milk and whisk for 1 minute. Raise heat to medium-high and cook, stirring often, until the sauce thickens and comes to a simmer. Remove from heat, whisk in Cheddar cheese, and reserve until needed.
+\n<b>Step 4</b>\nFill a large pot with water and remaining salt and bring to a rapid boil. Cook egg noodles for 5 minutes. Drain well and add to a large mixing bowl. Stir in the reserved sauce, followed by tuna, peas, cayenne, black pepper, and Worcestershire sauce. Mix with a spatula until evenly combined.
+\n<b>Step 5</b>\nPour the mixture into the prepared dish. Mix bread crumbs, Parmigiano-Reggiano cheese, and olive oil together in a small bowl until combined and resembling wet sand. Sprinkle evenly over the casserole.
+\n<b>Step 6</b>\nBake in the center of the preheated oven until browned and bubbly, about 30 minutes. Let sit for 10 minutes before cutting and serving."""
+</string>
+
     <string name="large_text">
+
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
