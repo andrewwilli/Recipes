@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
-import com.example.recipes.RequestManager
-import com.example.recipes.model.RandomRecipe
+import com.example.recipes.api.RequestManager
+import com.example.recipes.model.Recipe
 
 
 /**
@@ -39,21 +39,32 @@ class RecipeFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRecipeRecyclerViewAdapter(mutableListOf<RandomRecipe>())
-                if (container != null) {
-                    manager = RequestManager(
-                        container.getContext(),
-                        adapter as MyRecipeRecyclerViewAdapter
-                    )
-                    manager.getRandomRecipes()
-                }
+                adapter = MyRecipeRecyclerViewAdapter(mutableListOf())
+                createRequestManager(container, adapter as MyRecipeRecyclerViewAdapter)
                 addInfiniteScrollListenerToView(view, adapter as MyRecipeRecyclerViewAdapter)
+                loadInitialData()
             }
         }
         return view
     }
 
-    fun addInfiniteScrollListenerToView(view: RecyclerView, adapter: MyRecipeRecyclerViewAdapter) {
+    private fun loadInitialData() {
+        manager.getRandomRecipes()
+    }
+
+    private fun createRequestManager(container: ViewGroup?, adapter: MyRecipeRecyclerViewAdapter) {
+        if (container != null) {
+            manager = RequestManager(
+                container.getContext(),
+                adapter
+            )
+        }
+    }
+
+    private fun addInfiniteScrollListenerToView(
+        view: RecyclerView,
+        adapter: MyRecipeRecyclerViewAdapter
+    ) {
         view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -66,8 +77,6 @@ class RecipeFragment : Fragment() {
     }
 
     companion object {
-
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
         // TODO: Customize parameter initialization
