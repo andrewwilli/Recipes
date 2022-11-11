@@ -7,7 +7,7 @@
             android:id="@+id/top_bar_search"
             android:icon="@drawable/magnify"
             android:title="Search"
+            app:actionViewClass="android.widget.SearchView"
             app:showAsAction="ifRoom" />
-
 
     </menu>

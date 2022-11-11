@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
+import com.example.recipes.VolleyCallback
 import com.example.recipes.api.RequestManager
 import com.example.recipes.model.Recipe
 
@@ -16,15 +17,22 @@ import com.example.recipes.model.Recipe
 /**
  * A fragment representing a list of Items.
  */
-class RecipeFragment : Fragment() {
+class RecipeFragment : Fragment(){
 
     private var columnCount = 1
     lateinit var manager: RequestManager
+    lateinit var adapter: MyRecipeRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
+        }
+    }
+
+    val x = object : VolleyCallback {
+        override fun onSuccess(result: MutableList<Recipe>) {
+            adapter.setItems(result)
         }
     }
 
@@ -40,24 +48,38 @@ class RecipeFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
                 adapter = MyRecipeRecyclerViewAdapter(mutableListOf())
-                createRequestManager(container, adapter as MyRecipeRecyclerViewAdapter)
+                createRequestManager(container)
                 addInfiniteScrollListenerToView(view, adapter as MyRecipeRecyclerViewAdapter)
-                loadInitialData()
+                loadInitialData(adapter as MyRecipeRecyclerViewAdapter)
+                setAdapterReference(adapter as MyRecipeRecyclerViewAdapter)
             }
         }
         return view
     }
 
-    private fun loadInitialData() {
-        manager.getRandomRecipes()
+    fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
+        this.adapter=adapter
     }
 
-    private fun createRequestManager(container: ViewGroup?, adapter: MyRecipeRecyclerViewAdapter) {
+    fun loadInitialData(adapter: MyRecipeRecyclerViewAdapter) {
+        manager.getRandomRecipes(object : VolleyCallback {
+            override fun onSuccess(result: MutableList<Recipe>) {
+                adapter.setItems(result)
+            }
+        })
+    }
+
+    fun loadRecipesBySearchString(text: String) {
+        manager.loadRecipesFilteredByTitle(text, object : VolleyCallback {
+            override fun onSuccess(result: MutableList<Recipe>) {
+                adapter.setItems(result)
+            }
+        })
+    }
+
+    private fun createRequestManager(container: ViewGroup?) {
         if (container != null) {
-            manager = RequestManager(
-                container.getContext(),
-                adapter
-            )
+            manager = RequestManager(container.getContext())
         }
     }
 
@@ -70,7 +92,11 @@ class RecipeFragment : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItems().size - 1) {
-                    manager.loadMoreRecipes()
+                    manager.getRandomRecipes(object : VolleyCallback {
+                        override fun onSuccess(result: MutableList<Recipe>) {
+                            adapter.appendItems(result)
+                        }
+                    })
                 }
             }
         })
@@ -88,4 +114,5 @@ class RecipeFragment : Fragment() {
                 }
             }
     }
+
 }
