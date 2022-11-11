@@ -2,6 +2,7 @@
     <string name="app_name">Recipes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_recipe">RecipeActivity</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -32,7 +33,7 @@
     *   2 tablespoons olive oil
     </string>
 
-<string name="instructions">
+    <string name="instructions">
 <b>Step 1</b>\nPreheat the oven to 375 degrees F (190 degrees C). Lightly butter a 9x13-inch casserole dish."
 \n<b>Step 2</b>\nMelt 3 tablespoons butter in a medium saucepan over medium heat. Saute onion with 1/2 teaspoon kosher salt until it starts to soften up and turn translucent, 3 to 4 minutes. Add the flour, and cook, stirring, for 3 minutes, reducing heat if needed.
 \n<b>Step 3</b>\nPour in cold milk and whisk for 1 minute. Raise heat to medium-high and cook, stirring often, until the sauce thickens and comes to a simmer. Remove from heat, whisk in Cheddar cheese, and reserve until needed.
@@ -134,4 +135,13 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="title_activity_recipe2">RecipeActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
