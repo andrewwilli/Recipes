@@ -4,8 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.recipes.VolleyCallback
-import com.example.recipes.fragments.MyRecipeRecyclerViewAdapter
+import com.example.recipes.callbacks.VolleyCallback
 import com.example.recipes.model.Recipe
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,7 +23,7 @@ class RequestManager(context: Context) {
 
     fun getRandomRecipes(callback: VolleyCallback) {
         val url =
-            baseURL+"random?number=4&tags=vegetarian,dessert&apiKey="+apiKey
+            baseURL + "random?number=4&tags=vegetarian,dessert&apiKey=" + apiKey
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
@@ -44,9 +43,14 @@ class RequestManager(context: Context) {
 
     }
 
-    fun loadRecipesFilteredByTitle(searchString: String, callback: VolleyCallback) {
+    fun loadRecipesFilteredByTitle(
+        searchString: String,
+        limit: Int,
+        offset: Int,
+        callback: VolleyCallback
+    ) {
         val url =
-            baseURL+"complexSearch?query="+searchString+"&apiKey="+apiKey
+            baseURL + "complexSearch?query=" + searchString + "&apiKey=" + apiKey + "&number=" + limit + "&offset=" + offset
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {

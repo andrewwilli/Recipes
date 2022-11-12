@@ -55,7 +55,6 @@ class MyRecipeRecyclerViewAdapter(
     }
 
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        // val idView: TextView = binding.itemNumber
         val nameView: TextView = binding.itemName
         val readyInMinutes: TextView = binding.itemDuration
         val imageView: ImageView = binding.itemImage

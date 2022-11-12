@@ -24,13 +24,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         navView.setNavigationItemSelectedListener {
 
             when (it.itemId) {
@@ -51,17 +49,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val recipeFragment: RecipeFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
+        val recipeFragment: RecipeFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
         menuInflater.inflate(R.menu.top_bar_menu, menu)
-        val search:MenuItem? = menu?.findItem(R.id.top_bar_search)
-        val searchView:SearchView = search?.actionView as SearchView
+
+        val search: MenuItem? = menu?.findItem(R.id.top_bar_search)
+        val searchView: SearchView = search?.actionView as SearchView
         searchView.queryHint = "Search Something!"
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                if (p0 != null) {
-                    println(p0)
-                    recipeFragment.loadRecipesBySearchString(p0)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            //todo: cant submit a empty text
+            override fun onQueryTextSubmit(searchString: String?): Boolean {
+                if (searchString != null) {
+                    recipeFragment.setCurrentSearchString(searchString)
                 }
                 search.collapseActionView();
                 return false

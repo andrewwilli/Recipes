@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
-import com.example.recipes.VolleyCallback
+import com.example.recipes.callbacks.VolleyCallback
 import com.example.recipes.api.RequestManager
 import com.example.recipes.model.Recipe
 
@@ -17,22 +17,19 @@ import com.example.recipes.model.Recipe
 /**
  * A fragment representing a list of Items.
  */
-class RecipeFragment : Fragment(){
+class RecipeFragment : Fragment() {
 
     private var columnCount = 1
     lateinit var manager: RequestManager
     lateinit var adapter: MyRecipeRecyclerViewAdapter
+    var searchString: String = ""
+    var searchOffset: Int = 0
+    var pageSize: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
-
-    val x = object : VolleyCallback {
-        override fun onSuccess(result: MutableList<Recipe>) {
-            adapter.setItems(result)
         }
     }
 
@@ -48,29 +45,21 @@ class RecipeFragment : Fragment(){
                     else -> GridLayoutManager(context, columnCount)
                 }
                 adapter = MyRecipeRecyclerViewAdapter(mutableListOf())
+                setAdapterReference(adapter as MyRecipeRecyclerViewAdapter)
                 createRequestManager(container)
                 addInfiniteScrollListenerToView(view, adapter as MyRecipeRecyclerViewAdapter)
-                loadInitialData(adapter as MyRecipeRecyclerViewAdapter)
-                setAdapterReference(adapter as MyRecipeRecyclerViewAdapter)
+                loadInitialData()
             }
         }
         return view
     }
 
-    fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
-        this.adapter=adapter
+    private fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
+        this.adapter = adapter
     }
 
-    fun loadInitialData(adapter: MyRecipeRecyclerViewAdapter) {
+    private fun loadInitialData() {
         manager.getRandomRecipes(object : VolleyCallback {
-            override fun onSuccess(result: MutableList<Recipe>) {
-                adapter.setItems(result)
-            }
-        })
-    }
-
-    fun loadRecipesBySearchString(text: String) {
-        manager.loadRecipesFilteredByTitle(text, object : VolleyCallback {
             override fun onSuccess(result: MutableList<Recipe>) {
                 adapter.setItems(result)
             }
@@ -92,12 +81,44 @@ class RecipeFragment : Fragment(){
                 super.onScrolled(recyclerView, dx, dy)
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItems().size - 1) {
-                    manager.getRandomRecipes(object : VolleyCallback {
-                        override fun onSuccess(result: MutableList<Recipe>) {
-                            adapter.appendItems(result)
-                        }
-                    })
+                    if (searchString.isEmpty()) {
+                        manager.getRandomRecipes(object : VolleyCallback {
+                            override fun onSuccess(result: MutableList<Recipe>) {
+                                adapter.appendItems(result)
+                            }
+                        })
+                    } else {
+                        searchOffset += pageSize
+                        manager.loadRecipesFilteredByTitle(
+                            searchString,
+                            pageSize,
+                            searchOffset,
+                            object : VolleyCallback {
+                                override fun onSuccess(result: MutableList<Recipe>) {
+                                    adapter.appendItems(result)
+                                }
+                            });
+                    }
                 }
+            }
+        })
+    }
+
+    fun setCurrentSearchString(text: String) {
+        //todo: can this really handle empty string
+        searchString = text
+        searchOffset = 0
+        if (searchString.length != 0) {
+            loadRecipesBySearchString(text)
+        } else {
+            loadInitialData()
+        }
+    }
+
+    fun loadRecipesBySearchString(text: String) {
+        manager.loadRecipesFilteredByTitle(text, pageSize, 0, object : VolleyCallback {
+            override fun onSuccess(result: MutableList<Recipe>) {
+                adapter.setItems(result)
             }
         })
     }
