@@ -25,6 +25,7 @@ class RecipeFragment : Fragment() {
     var searchString: String = ""
     var searchOffset: Int = 0
     var pageSize: Int = 2
+    var cuisine: String = "All"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +73,7 @@ class RecipeFragment : Fragment() {
         }
     }
 
+
     private fun addInfiniteScrollListenerToView(
         view: RecyclerView,
         adapter: MyRecipeRecyclerViewAdapter
@@ -81,16 +83,18 @@ class RecipeFragment : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItems().size - 1) {
-                    if (searchString.isEmpty()) {
+                    if (searchString.isEmpty() && cuisine === "All") {
                         manager.getRandomRecipes(object : VolleyCallback {
                             override fun onSuccess(result: MutableList<Recipe>) {
                                 adapter.appendItems(result)
                             }
                         })
                     } else {
+                        println(cuisine)
                         searchOffset += pageSize
-                        manager.loadRecipesFilteredByTitle(
+                        manager.loadRecipesFiltered(
                             searchString,
+                            cuisine,
                             pageSize,
                             searchOffset,
                             object : VolleyCallback {
@@ -106,21 +110,34 @@ class RecipeFragment : Fragment() {
 
     fun setCurrentSearchString(text: String) {
         //todo: can this really handle empty string
+        println("THIS ONE GETS RUN")
+        println(text)
         searchString = text
         searchOffset = 0
-        if (searchString.length != 0) {
-            loadRecipesBySearchString(text)
-        } else {
-            loadInitialData()
-        }
+        loadFilteredRecipes()
     }
 
-    fun loadRecipesBySearchString(text: String) {
-        manager.loadRecipesFilteredByTitle(text, pageSize, 0, object : VolleyCallback {
-            override fun onSuccess(result: MutableList<Recipe>) {
-                adapter.setItems(result)
-            }
-        })
+    fun setCurrentCuisine(cuisine: String) {
+        this.cuisine = cuisine
+        loadFilteredRecipes()
+    }
+
+    fun loadFilteredRecipes() {
+        if (searchString.length == 0 && cuisine == "All") {
+            println("NOT THIS ONE")
+            loadInitialData()
+        } else {
+            manager.loadRecipesFiltered(
+                searchString,
+                cuisine,
+                pageSize,
+                0,
+                object : VolleyCallback {
+                    override fun onSuccess(result: MutableList<Recipe>) {
+                        adapter.setItems(result)
+                    }
+                })
+        }
     }
 
     companion object {

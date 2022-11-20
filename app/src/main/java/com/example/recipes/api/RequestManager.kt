@@ -14,16 +14,21 @@ import org.json.JSONException
 class RequestManager(context: Context) {
 
     var baseURL = "https://api.spoonacular.com/recipes/"
-    var apiKey = "80e4276aeedc4c0c963addb5d27af1e0"
+    //    var apiKey = "80e4276aeedc4c0c963addb5d27af1e0"
+    var apiKey = "68641ff6c90e4d91ac418e66cdc4533d"
     var context: Context
+    val requestQueue = Volley.newRequestQueue(context)
+
+
 
     init {
         this.context = context
     }
 
     fun getRandomRecipes(callback: VolleyCallback) {
+        requestQueue.cancelAll("All")
         val url =
-            baseURL + "random?number=4&tags=vegetarian,dessert&apiKey=" + apiKey
+            baseURL + "random?number=2&tags=vegetarian,dessert&apiKey=$apiKey"
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
@@ -38,19 +43,19 @@ class RequestManager(context: Context) {
                 }
             }
         ) { error -> Log.e("LOG", error.toString()) }
-        val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonObjectRequest)
-
     }
 
-    fun loadRecipesFilteredByTitle(
+    fun loadRecipesFiltered(
         searchString: String,
+        cuisine: String,
         limit: Int,
         offset: Int,
         callback: VolleyCallback
     ) {
+        requestQueue.cancelAll("All")
         val url =
-            baseURL + "complexSearch?query=" + searchString + "&apiKey=" + apiKey + "&number=" + limit + "&offset=" + offset
+            baseURL + "complexSearch?query=$searchString&apiKey=$apiKey&number=$limit&offset=$offset&cuisine=$cuisine"
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
@@ -65,8 +70,9 @@ class RequestManager(context: Context) {
                 }
             }
         ) { error -> Log.e("LOG", error.toString()) }
-        val requestQueue = Volley.newRequestQueue(context)
+
         requestQueue.add(jsonObjectRequest)
     }
 
 }
+

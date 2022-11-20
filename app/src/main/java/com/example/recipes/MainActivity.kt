@@ -1,23 +1,23 @@
 package com.example.recipes
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Group
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.recipes.fragments.RecipeFragment
 import com.google.android.material.navigation.NavigationView
 
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
+    lateinit var currentSearchString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun Group.addOnClickListener(listener: (view: View) -> Unit) {
+        referencedIds.forEach { id ->
+            rootView.findViewById<View>(id).setOnClickListener(listener)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val recipeFragment: RecipeFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
@@ -55,10 +61,11 @@ class MainActivity : AppCompatActivity() {
 
         val search: MenuItem? = menu?.findItem(R.id.top_bar_search)
         val searchView: SearchView = search?.actionView as SearchView
+
         searchView.queryHint = "Search Something!"
 
+        searchView.setOnSearchClickListener { searchView.setQuery(recipeFragment.searchString, false) }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            //todo: cant submit a empty text
             override fun onQueryTextSubmit(searchString: String?): Boolean {
                 if (searchString != null) {
                     recipeFragment.setCurrentSearchString(searchString)
@@ -68,14 +75,34 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                return false
+                if (p0 != null) {
+                    if(p0.length==0) {
+                        recipeFragment.setCurrentSearchString("")
+                    }
+                }
+                return true;
             }
 
         })
         return super.onCreateOptionsMenu(menu)
     }
 
+    fun cuisineSelected(item: MenuItem, recipeFragment: RecipeFragment){
+        val cuisines = applicationContext.resources.getStringArray(R.array.cuisines).asList()
+        if(cuisines.contains(item.title)) {
+            println("CUISINE DETECTED")
+            item.setChecked(!item.isChecked)
+            recipeFragment.setCurrentCuisine(item.title as String)
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val recipeFragment: RecipeFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
+
+        cuisineSelected(item, recipeFragment)
+
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
@@ -83,4 +110,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
