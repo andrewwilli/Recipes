@@ -108,6 +108,12 @@ class RecipeFragment : Fragment() {
         })
     }
 
+    fun randomize(){
+        searchString = ""
+        cuisine = "All"
+        loadInitialData()
+    }
+
     fun setCurrentSearchString(text: String) {
         if(text!=searchString) {
             searchString = text

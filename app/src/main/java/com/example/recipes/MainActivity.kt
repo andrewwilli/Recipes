@@ -3,6 +3,8 @@ package com.example.recipes
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        createButtonListener()
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
 
@@ -43,6 +47,19 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+    }
+
+    fun createButtonListener() {
+        val recipeFragment: RecipeFragment =
+        supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
+
+        val button: Button = findViewById(R.id.button)
+        button.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                recipeFragment.randomize()
+            }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
