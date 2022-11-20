@@ -24,7 +24,7 @@ class RecipeFragment : Fragment() {
     lateinit var adapter: MyRecipeRecyclerViewAdapter
     var searchString: String = ""
     var searchOffset: Int = 0
-    var pageSize: Int = 2
+    var pageSize: Int = 5
     var cuisine: String = "All"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,12 +109,11 @@ class RecipeFragment : Fragment() {
     }
 
     fun setCurrentSearchString(text: String) {
-        //todo: can this really handle empty string
-        println("THIS ONE GETS RUN")
-        println(text)
-        searchString = text
-        searchOffset = 0
-        loadFilteredRecipes()
+        if(text!=searchString) {
+            searchString = text
+            searchOffset = 0
+            loadFilteredRecipes()
+        }
     }
 
     fun setCurrentCuisine(cuisine: String) {
@@ -124,7 +123,6 @@ class RecipeFragment : Fragment() {
 
     fun loadFilteredRecipes() {
         if (searchString.length == 0 && cuisine == "All") {
-            println("NOT THIS ONE")
             loadInitialData()
         } else {
             manager.loadRecipesFiltered(

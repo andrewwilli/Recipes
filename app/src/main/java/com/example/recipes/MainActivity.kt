@@ -3,12 +3,10 @@ package com.example.recipes
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.recipes.fragments.RecipeFragment
 import com.google.android.material.navigation.NavigationView
@@ -17,7 +15,6 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
-    lateinit var currentSearchString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +43,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-    }
-
-    fun Group.addOnClickListener(listener: (view: View) -> Unit) {
-        referencedIds.forEach { id ->
-            rootView.findViewById<View>(id).setOnClickListener(listener)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,7 +81,6 @@ class MainActivity : AppCompatActivity() {
     fun cuisineSelected(item: MenuItem, recipeFragment: RecipeFragment){
         val cuisines = applicationContext.resources.getStringArray(R.array.cuisines).asList()
         if(cuisines.contains(item.title)) {
-            println("CUISINE DETECTED")
             item.setChecked(!item.isChecked)
             recipeFragment.setCurrentCuisine(item.title as String)
         }
