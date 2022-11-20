@@ -9,7 +9,7 @@
     <item
         android:id="@+id/nav_randomize"
         android:title="Random Recipe"
-        android:icon="@drawable/ic_baseline_randomize_24"/>
+        android:icon="@drawable/shuffle"/>
 
 
     <item
@@ -17,5 +17,8 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings"/>
 
-
+    <item
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/heart"
+        android:title="Favorites"/>
 </menu>

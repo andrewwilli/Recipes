@@ -103,6 +103,47 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="all">All</string>
+    <string name="african">African</string>
+    <string name="american">American</string>
+    <string name="britísh">british</string>
+    <string name="cajun">Cajun</string>
+    <string name="caribbean">Caribbean</string>
+    <string name="chinese">Chinese</string>
+    <string name="eastern_european">Eastern European</string>
+    <string name="european">European</string>
+    <string name="french">French</string>
+    <string name="german">German</string>
+    <string name="greek">Greek</string>
+    <string name="indian">Indian</string>
+    <string name="irish">Irish</string>
+    <string name="italian">Italian</string>
+    <string name="japanese">Japanese</string>
+
+    <!--    Wasnt able to find a better way for an string array, source: https://stackoverflow.com/questions/4161256/referencing-a-string-in-a-string-array-resource-with-xml-->
+    <string-array name="cuisines">
+        <item>@string/all</item>
+        <item>@string/african</item>
+        <item>@string/american</item>
+        <item>@string/britísh</item>
+        <item>@string/cajun</item>
+        <item>@string/caribbean</item>
+        <item>@string/chinese</item>
+        <item>@string/eastern_european</item>
+        <item>@string/european</item>
+        <item>@string/french</item>
+        <item>@string/german</item>
+        <item>@string/greek</item>
+        <item>@string/indian</item>
+        <item>@string/irish</item>
+        <item>@string/italian</item>
+        <item>@string/japanese</item>
+    </string-array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
