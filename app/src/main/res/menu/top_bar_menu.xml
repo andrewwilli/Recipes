@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <item
-            android:id="@+id/top_bar_search"
-            android:icon="@drawable/magnify"
-            android:title="Search"
-            app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/top_bar_search"
+        android:icon="@drawable/magnify"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom" />
 
-
-    </menu>
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_baseline_filter_list_24"
+        android:title="FilterItem"
+        app:showAsAction="ifRoom|withText">
+        <menu
+            android:id="@+id/filter_menu"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            >
+            <group
+                android:id="@+id/filter_group"
+                android:title="FilterItem"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/all"
+                    android:title="All" />
+                <item android:title="@string/african" />
+                <item android:title="@string/american" />
+                <item android:title="@string/britísh" />
+                <item android:title="@string/cajun" />
+                <item android:title="@string/caribbean" />
+                <item android:title="@string/chinese" />
+                <item android:title="@string/eastern_european" />
+                <item android:title="@string/european" />
+                <item android:title="@string/french" />
+                <item android:title="@string/german" />
+                <item android:title="@string/greek" />
+                <item android:title="@string/french" />
+                <item android:title="@string/indian" />
+                <item android:title="@string/irish" />
+                <item android:title="@string/italian" />
+                <item android:title="@string/japanese" />
+            </group>
+        </menu>
+    </item>
+    !-
+</menu>

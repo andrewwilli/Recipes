@@ -2,7 +2,6 @@
     <string name="app_name">Recipes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_recipe">RecipeActivity</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,12 +10,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="nutrition">Nutrition</string>
+    <string name="title_activity_recipe">RecipeActivity</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="ready_in_15_min">15 Min</string>
     <string name="ingredients">    *   3 tablespoons unsalted butter
@@ -43,9 +38,10 @@
 \n<b>Step 5</b>\nPour the mixture into the prepared dish. Mix bread crumbs, Parmigiano-Reggiano cheese, and olive oil together in a small bowl until combined and resembling wet sand. Sprinkle evenly over the casserole.
 \n<b>Step 6</b>\nBake in the center of the preheated oven until browned and bubbly, about 30 minutes. Let sit for 10 minutes before cutting and serving."""
 </string>
-
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
     <string name="large_text">
-
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -135,15 +131,47 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="title_activity_recipe2">RecipeActivity2</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="all">All</string>
+    <string name="african">African</string>
+    <string name="american">American</string>
+    <string name="britísh">british</string>
+    <string name="cajun">Cajun</string>
+    <string name="caribbean">Caribbean</string>
+    <string name="chinese">Chinese</string>
+    <string name="eastern_european">Eastern European</string>
+    <string name="european">European</string>
+    <string name="french">French</string>
+    <string name="german">German</string>
+    <string name="greek">Greek</string>
+    <string name="indian">Indian</string>
+    <string name="irish">Irish</string>
+    <string name="italian">Italian</string>
+    <string name="japanese">Japanese</string>
+
+    <!--    Wasnt able to find a better way for an string array, source: https://stackoverflow.com/questions/4161256/referencing-a-string-in-a-string-array-resource-with-xml-->
+    <string-array name="cuisines">
+        <item>@string/all</item>
+        <item>@string/african</item>
+        <item>@string/american</item>
+        <item>@string/britísh</item>
+        <item>@string/cajun</item>
+        <item>@string/caribbean</item>
+        <item>@string/chinese</item>
+        <item>@string/eastern_european</item>
+        <item>@string/european</item>
+        <item>@string/french</item>
+        <item>@string/german</item>
+        <item>@string/greek</item>
+        <item>@string/indian</item>
+        <item>@string/irish</item>
+        <item>@string/italian</item>
+        <item>@string/japanese</item>
+    </string-array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

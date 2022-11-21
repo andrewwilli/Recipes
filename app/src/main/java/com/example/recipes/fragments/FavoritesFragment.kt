@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
-import com.example.recipes.RequestManager
+import com.example.recipes.api.RequestManager
+import com.example.recipes.callbacks.VolleyCallback
+import com.example.recipes.model.Recipe
 
 /**
  * A fragment representing a list of Items.
@@ -18,6 +20,7 @@ class FavoritesFragment : Fragment() {
 
     private var columnCount = 1
     lateinit var manager : RequestManager
+    lateinit var adapter: MyRecipeRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,20 +43,30 @@ class FavoritesFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRecipRecyclerViewAdapter(emptyList())
+                adapter = MyRecipeRecyclerViewAdapter(mutableListOf())
 
                 if (container != null) {
                     manager = RequestManager(
-                        container.getContext(),
-                        adapter as MyRecipRecyclerViewAdapter
+                        container.getContext()
+
                     )
-                    manager.getRandomRecipes2()
+                    loadInitialData()
                 }
             }
         }
         return view
     }
 
+    private fun loadInitialData() {
+        manager.getRandomRecipes(object : VolleyCallback {
+            override fun onSuccess(result: MutableList<Recipe>) {
+                adapter.setItems(result)
+            }
+        })
+    }
+    private fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
+        this.adapter = adapter
+    }
     companion object {
 
         // TODO: Customize parameter argument names
