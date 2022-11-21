@@ -16,7 +16,7 @@ import com.example.recipes.RequestManager
  */
 class FavoritesFragment : Fragment() {
 
-    private var columnCount = 2
+    private var columnCount = 1
     lateinit var manager : RequestManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
