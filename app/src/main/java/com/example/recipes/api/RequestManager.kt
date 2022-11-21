@@ -14,12 +14,9 @@ import org.json.JSONException
 class RequestManager(context: Context) {
 
     var baseURL = "https://api.spoonacular.com/recipes/"
-    //    var apiKey = "80e4276aeedc4c0c963addb5d27af1e0"
     var apiKey = "68641ff6c90e4d91ac418e66cdc4533d"
     var context: Context
     val requestQueue = Volley.newRequestQueue(context)
-
-
 
     init {
         this.context = context
@@ -37,6 +34,8 @@ class RequestManager(context: Context) {
                         response.getString("recipes"),
                         typeToken
                     )
+                    println("SKYAAAAAAAAAAAAA")
+                    println(recipes.get(0).readyInMinutes)
                     callback.onSuccess(recipes)
                 } catch (e: JSONException) {
                     e.printStackTrace()

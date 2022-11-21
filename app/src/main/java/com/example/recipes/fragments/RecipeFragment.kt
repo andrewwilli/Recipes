@@ -73,7 +73,6 @@ class RecipeFragment : Fragment() {
         }
     }
 
-
     private fun addInfiniteScrollListenerToView(
         view: RecyclerView,
         adapter: MyRecipeRecyclerViewAdapter
