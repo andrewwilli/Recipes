@@ -39,14 +39,9 @@ class MyRecipeRecyclerViewAdapter(
         holder.nameView.text = item.title
         holder.readyInMinutes.text = item.readyInMinutes + " Min"
         holder.itemView.setOnClickListener {
-            //todo: open new activity of recipe
-
             val myIntent = Intent(parent.context, RecipeActivity::class.java)
+            myIntent.putExtra("recipeId", item.id) //Optional parameters
             parent.context.startActivity(myIntent)
-            myIntent.putExtra("key", item.id) //Optional parameters
-
-            println("was clicked")
-            println(item.id)
         }
         Picasso.get().load(item.image).into(holder.imageView)
     }

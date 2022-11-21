@@ -89,7 +89,6 @@ class RecipeFragment : Fragment() {
                             }
                         })
                     } else {
-                        println(cuisine)
                         searchOffset += pageSize
                         manager.loadRecipesFiltered(
                             searchString,

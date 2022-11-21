@@ -36,8 +36,6 @@ class RequestManager(context: Context) {
                         response.getString("recipes"),
                         typeToken
                     )
-                    println("SKYAAAAAAAAAAAAA")
-                    println(recipes.get(0).readyInMinutes)
                     callback.onSuccess(recipes)
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -78,16 +76,16 @@ class RequestManager(context: Context) {
     fun getDetailsForRecipe(recipeId: String, callback: RecipeDetailCallback){
         requestQueue.cancelAll("All")
         val url =
-            baseURL + "recipes/$recipeId/information?apiKey=$apiKey"
+            baseURL + "$recipeId/information?includeNutrition=false&apiKey=$apiKey"
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
-                    val typeToken = object : TypeToken<MutableList<Recipe>>() {}.type
-                    val recipes = Gson().fromJson<RecipeDetail>(
-                        response.getString("results"),
+                    val typeToken = object : TypeToken<RecipeDetail>() {}.type
+                    val detailedRecipe = Gson().fromJson<RecipeDetail>(
+                        response.toString(),
                         typeToken
                     )
-                    callback.onSuccess(recipes)
+                    callback.onSuccess(detailedRecipe)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
