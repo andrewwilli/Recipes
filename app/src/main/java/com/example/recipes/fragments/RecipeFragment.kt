@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
-import com.example.recipes.callbacks.VolleyCallback
 import com.example.recipes.api.RequestManager
+import com.example.recipes.callbacks.VolleyCallback
 import com.example.recipes.model.Recipe
 
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerRecipeHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_recipe_header"/>
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerRecipeIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fragmentContainerRecipeHeader"
+            tools:layout="@layout/fragment_recipe_ingredients"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_alignBottom="@id/fragmentContainerRecipeIngredients" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentContainerRecipeInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/fragmentContainerRecipeIngredients"
+                    tools:layout="@layout/fragment_recipe_instructions"/>
+    <!--
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView7"
+                android:name="com.example.recipes.fragments.FavoritesFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:layout="@layout/fragment_favorites_list" />
+                -->
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/navigation_drawer"
+        app:menu="@menu/nav_menu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"/>
+</androidx.drawerlayout.widget.DrawerLayout>
