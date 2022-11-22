@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
 import com.example.recipes.api.RequestManager
-import com.example.recipes.callbacks.VolleyCallback
+import com.example.recipes.callbacks.RecipeCallback
 import com.example.recipes.model.Recipe
 
 
@@ -69,7 +69,7 @@ class RecipeFragment : Fragment() {
     }
 
     private fun loadInitialData() {
-        manager.getRandomRecipes(object : VolleyCallback {
+        manager.getRandomRecipes(object : RecipeCallback {
             override fun onSuccess(result: MutableList<Recipe>) {
                 adapter.setItems(result)
             }
@@ -92,20 +92,19 @@ class RecipeFragment : Fragment() {
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItems().size - 1) {
                     if (searchString.isEmpty() && cuisine === "All") {
-                        manager.getRandomRecipes(object : VolleyCallback {
+                        manager.getRandomRecipes(object : RecipeCallback {
                             override fun onSuccess(result: MutableList<Recipe>) {
                                 adapter.appendItems(result)
                             }
                         })
                     } else {
-                        println(cuisine)
                         searchOffset += pageSize
                         manager.loadRecipesFiltered(
                             searchString,
                             cuisine,
                             pageSize,
                             searchOffset,
-                            object : VolleyCallback {
+                            object : RecipeCallback {
                                 override fun onSuccess(result: MutableList<Recipe>) {
                                     adapter.appendItems(result)
                                 }
@@ -144,7 +143,7 @@ class RecipeFragment : Fragment() {
                 cuisine,
                 pageSize,
                 0,
-                object : VolleyCallback {
+                object : RecipeCallback {
                     override fun onSuccess(result: MutableList<Recipe>) {
                         adapter.setItems(result)
                     }
