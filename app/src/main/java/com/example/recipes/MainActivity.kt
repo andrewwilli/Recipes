@@ -18,6 +18,8 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
+    var searchView: SearchView? = null
+    var checkedItem: MenuItem? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +35,19 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    var checkedItem: MenuItem? = null;
-
-
     fun createButtonListener() {
         val recipeFragment: RecipeFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                checkedItem?.let { onOptionsItemSelected(it) }
-                //Trying to uncheck item and reset the text in the options menu, but wasn't able to update it in runtime (would appreciate a soultion)
+                checkedItem?.setChecked(false)
+                println(checkedItem)
+                println(searchView)
+                searchView?.setQuery("", false)
+                searchView?.clearFocus()
+                searchView?.setIconified(true)
+                invalidateOptionsMenu()
                 recipeFragment.randomize()
             }
         })
@@ -55,7 +59,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.top_bar_menu, menu)
 
         val search: MenuItem? = menu?.findItem(R.id.top_bar_search)
-        val searchView: SearchView = search?.actionView as SearchView
+        val searchView = search?.actionView as SearchView
+        this.searchView = searchView
 
         searchView.queryHint = "Search Something!"
 
