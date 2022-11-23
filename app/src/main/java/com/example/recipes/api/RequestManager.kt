@@ -1,9 +1,12 @@
 package com.example.recipes.api
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.recipes.callbacks.FavoriteCallback
 import com.example.recipes.callbacks.RecipeCallback
 import com.example.recipes.callbacks.RecipeDetailCallback
 import com.example.recipes.model.Recipe
@@ -92,6 +95,66 @@ class RequestManager(context: Context) {
             }
         ) { error -> Log.e("LOG", error.toString()) }
         requestQueue.add(jsonObjectRequest)
+
+    }
+    fun getFavoriteRecipe(recipeId: String, callback: FavoriteCallback) {
+        val list: List<String> = recipeId.split(",")
+        val listM : MutableList<Recipe> = emptyList<Recipe>().toMutableList()
+        var intcounter = 0
+        for(item in list){
+
+             getDetailsForRecipe(item, object : RecipeDetailCallback {
+                @RequiresApi(Build.VERSION_CODES.N)
+                override fun onSuccess(result: RecipeDetail) {
+                    val recipe = Recipe(result.id, result.title, result.readyInMinutes, result.image)
+                    listM.add(recipe)
+                    intcounter++
+                    if (intcounter==list.size){
+                        callback.onSuccess(listM)
+                    }
+                }
+            })
+        }
+/*
+        val bulk = "informationBulk?ids=664288,632593"
+        val url = baseURL +bulk+ "$&apiKey=$apiKey"
+        val jsonObjectRequest = JsonObjectRequest(url,
+            { response ->
+                try {
+                    println(response)
+                    val typeToken = object : TypeToken<MutableList<RecipeDetail>>() {}.type
+                    val recipes = Gson().fromJson<MutableList<RecipeDetail>>(
+                        response.toString(),
+                        typeToken
+                    )
+
+                    //callback.onSuccess(recipes)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        ) { error -> Log.e("LOG", error.toString()) }
+        requestQueue.add(jsonObjectRequest)
+*/
+        /*
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET, url, null,
+            {response ->
+                try {
+                    for (i in 0 until response.length()) {
+                        val typeToken = object : TypeToken<MutableList<Recipe>>() {}.type
+                        val recipes = Gson().fromJson<MutableList<Recipe>>(
+                            response.getString(i),
+                            typeToken
+                        )
+                    }
+                }catch (e:JSONException){
+                    e.printStackTrace()
+                }
+            }) { error -> Log.e("LOG", error.toString()) }
+        requestQueue.add(jsonArrayRequest)
+*/
+
 
     }
 

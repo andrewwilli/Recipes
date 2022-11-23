@@ -2,12 +2,14 @@ package com.example.recipes
 
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -33,6 +35,7 @@ class RecipeActivity : AppCompatActivity() {
         val recipeId: String? = intent.getStringExtra("recipeId")
         if (recipeId != null) {
             manager.getDetailsForRecipe(recipeId, object : RecipeDetailCallback {
+                @RequiresApi(Build.VERSION_CODES.N)
                 override fun onSuccess(result: RecipeDetail) {
                     setRecipeDetailsOnView(result)
                     //todo: add listener for nutrition
@@ -78,6 +81,7 @@ class RecipeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun setIngredientsText(result: RecipeDetail) {
         val ingredientsTextView: TextView = findViewById(R.id.fragment_recipe_ingredients_text_view)
         val ingredients: MutableList<String> =
@@ -90,6 +94,7 @@ class RecipeActivity : AppCompatActivity() {
         ingredientsTextView.setText(ingredientsText)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun setInstructionsText(result: RecipeDetail) {
         val instructionsTextView: TextView =
             findViewById(R.id.fragment_recipe_instructions_text_view)
@@ -127,6 +132,7 @@ class RecipeActivity : AppCompatActivity() {
         recipeTitle.setText(recipeTitleText)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun setRecipeDetailsOnView(result: RecipeDetail) {
         setIngredientsText(result)
         setInstructionsText(result)

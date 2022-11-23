@@ -1,16 +1,13 @@
 package com.example.recipes.fragments
 
 
-import android.os.Environment
-
-import android.app.Activity
 import android.content.Intent
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.RecipeActivity
 import com.example.recipes.databinding.FragmentItemBinding
@@ -19,13 +16,12 @@ import com.squareup.picasso.Picasso
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import java.io.IOException
 
 
 /**
  * TODO: Replace the implementation with code for your data type.
  */
-class MyRecipeRecyclerViewAdapter(
+class MyRecipeRecyclerViewAdapter  (
     private var values: MutableList<Recipe>
 ) : RecyclerView.Adapter<MyRecipeRecyclerViewAdapter.ViewHolder>() {
 
@@ -51,9 +47,12 @@ class MyRecipeRecyclerViewAdapter(
             myIntent.putExtra("recipeId", item.id) //Optional parameters
             parent.context.startActivity(myIntent)
         }
+
+
         Picasso.get().load(item.image).into(holder.imageView)
         holder.favorites.setOnClickListener{
             //todo: save in favorites file
+
             saveFavorites(item.id)
         }
     }
@@ -75,28 +74,25 @@ class MyRecipeRecyclerViewAdapter(
         return values
     }
     fun saveFavorites(imageId:String){
-        try {
 
             if(Environment.getExternalStorageDirectory().exists()){
-            val root = File(Environment.getExternalStorageDirectory().toString()+"/Favorites.txt")
+            val root = File(Environment.getExternalStorageDirectory().toString()+ "/Favorites.txt")
 
             if (!root.exists()){
-            root.createNewFile()
+                root.createNewFile()
             }
-            val fileWriter = FileWriter(root, true)
 
+            val fileWriter = FileWriter(root, true)
             val bufferedWriter = BufferedWriter(fileWriter)
-            bufferedWriter.write(imageId + "\n")
+            bufferedWriter.write(imageId + ", ")
             bufferedWriter.close()
 
-           }
-        } catch(e: IOException){
-
-        }
-
+            }
 
 
     }
+
+
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val nameView: TextView = binding.itemName
         val readyInMinutes: TextView = binding.itemDuration
@@ -108,5 +104,8 @@ class MyRecipeRecyclerViewAdapter(
             return super.toString() + " '" + nameView.text + "'"
         }
     }
+
+
+
 
 }

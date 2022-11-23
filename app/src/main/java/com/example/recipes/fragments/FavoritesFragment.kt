@@ -1,6 +1,7 @@
 package com.example.recipes.fragments
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
 import com.example.recipes.api.RequestManager
-import com.example.recipes.callbacks.RecipeCallback
+import com.example.recipes.callbacks.FavoriteCallback
 import com.example.recipes.model.Recipe
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 
 /**
  * A fragment representing a list of Items.
@@ -50,19 +54,51 @@ class FavoritesFragment : Fragment() {
                         container.getContext()
 
                     )
-                    loadInitialData()
+
+                    loadFavorites()
                 }
             }
         }
         return view
     }
 
-    private fun loadInitialData() {
+    private fun loadFavorites() {
+
+       val favoritesID = fileToString()
+        println(favoritesID)
+        manager.getFavoriteRecipe(favoritesID,object: FavoriteCallback{
+            override fun onSuccess(result: MutableList<Recipe>) {
+                adapter.setItems(result)
+            }
+        })
+        /*
         manager.getRandomRecipes(object : RecipeCallback {
             override fun onSuccess(result: MutableList<Recipe>) {
                 adapter.setItems(result)
             }
         })
+        */
+
+    }
+    fun fileToString(): String {
+        val root = File(Environment.getExternalStorageDirectory().toString()+"/Favorites.txt")
+        if (!root.exists()){
+            root.createNewFile()
+        }
+        val fileReader = FileReader(root)
+        val  reader = BufferedReader(fileReader)
+        val stringBuilder = StringBuilder()
+        var buffer = CharArray(10)
+        while (reader.read(buffer) !== -1) {
+            stringBuilder.append(String(buffer))
+            buffer = CharArray(10)
+        }
+        val content = stringBuilder.toString()
+        println(content)
+        reader.close()
+
+
+        return content
     }
     private fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
         this.adapter = adapter

@@ -1,7 +1,7 @@
 package com.example.recipes
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,14 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.recipes.fragments.RecipeFragment
 import com.google.android.material.navigation.NavigationView
-import java.io.File
+
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
-
-     private lateinit var dest : File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +29,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
-
-
-
-      createButtonListener()
+        createButtonListener()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
@@ -51,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                     "Clicked Randomize",
                     Toast.LENGTH_SHORT
                 ).show()
+                R.id.nav_favorites -> {
+                    val favIntent = Intent(this, FavoritesActivity::class.java)
+                    startActivity(favIntent)
+
+                }
             }
             true
         }
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     fun createButtonListener() {
         val recipeFragment: RecipeFragment =
-        supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
 
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener(object : View.OnClickListener{
@@ -123,7 +122,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 
 }
