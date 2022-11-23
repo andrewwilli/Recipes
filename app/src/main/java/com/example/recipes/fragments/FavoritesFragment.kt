@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.R
 import com.example.recipes.api.RequestManager
-import com.example.recipes.callbacks.VolleyCallback
+import com.example.recipes.callbacks.RecipeCallback
 import com.example.recipes.model.Recipe
 
 /**
@@ -58,7 +58,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun loadInitialData() {
-        manager.getRandomRecipes(object : VolleyCallback {
+        manager.getRandomRecipes(object : RecipeCallback {
             override fun onSuccess(result: MutableList<Recipe>) {
                 adapter.setItems(result)
             }

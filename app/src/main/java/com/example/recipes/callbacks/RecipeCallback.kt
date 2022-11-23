@@ -2,6 +2,6 @@ package com.example.recipes.callbacks
 
 import com.example.recipes.model.Recipe
 
-interface VolleyCallback {
+interface RecipeCallback {
     fun onSuccess(result: MutableList<Recipe>);
 }

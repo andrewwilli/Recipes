@@ -24,7 +24,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/favorite_item_image"
-            android:text="@string/recipe_title"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:autoSizeTextType="uniform"
@@ -39,7 +38,6 @@
             android:layout_marginTop="20dp"
             android:layout_below="@id/favorite_item_title"
             android:layout_toEndOf="@id/favorite_item_image"
-            android:text="@string/ready_in_15_min"
             android:textSize="@dimen/recipe_duration_random"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
