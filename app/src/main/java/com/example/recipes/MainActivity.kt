@@ -1,5 +1,6 @@
 package com.example.recipes
 
+import android.content.ClipData.Item
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -30,35 +31,21 @@ class MainActivity : AppCompatActivity() {
         createButtonListener()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener {
-
-            when (it.itemId) {
-                R.id.nav_setting -> Toast.makeText(
-                    applicationContext,
-                    "Clicked Settings",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.nav_randomize -> Toast.makeText(
-                    applicationContext,
-                    "Clicked Randomize",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            true
-        }
-
     }
+
+    var checkedItem: MenuItem? = null;
+
 
     fun createButtonListener() {
         val recipeFragment: RecipeFragment =
-        supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
-
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView4) as RecipeFragment
         val button: Button = findViewById(R.id.button)
-        button.setOnClickListener(object : View.OnClickListener{
+        button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+                checkedItem?.let { onOptionsItemSelected(it) }
+                //Trying to uncheck item and reset the text in the options menu, but wasn't able to update it in runtime (would appreciate a soultion)
                 recipeFragment.randomize()
             }
-
         })
     }
 
@@ -72,7 +59,12 @@ class MainActivity : AppCompatActivity() {
 
         searchView.queryHint = "Search Something!"
 
-        searchView.setOnSearchClickListener { searchView.setQuery(recipeFragment.searchString, false) }
+        searchView.setOnSearchClickListener {
+            searchView.setQuery(
+                recipeFragment.searchString,
+                false
+            )
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchString: String?): Boolean {
                 if (searchString != null) {
@@ -84,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0 != null) {
-                    if(p0.length==0) {
+                    if (p0.length == 0) {
                         recipeFragment.setCurrentSearchString("")
                     }
                 }
@@ -95,10 +87,11 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun cuisineSelected(item: MenuItem, recipeFragment: RecipeFragment){
+    fun cuisineSelected(item: MenuItem, recipeFragment: RecipeFragment) {
         val cuisines = applicationContext.resources.getStringArray(R.array.cuisines).asList()
-        if(cuisines.contains(item.title)) {
+        if (cuisines.contains(item.title)) {
             item.setChecked(!item.isChecked)
+            checkedItem = item
             recipeFragment.setCurrentCuisine(item.title as String)
         }
     }

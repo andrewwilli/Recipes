@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -26,16 +28,18 @@ class RecipeActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var manager: RequestManager
+    lateinit var recipeId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         manager = RequestManager(baseContext)
         val intent: Intent = intent
         val recipeId: String? = intent.getStringExtra("recipeId")
         if (recipeId != null) {
+            this.recipeId = recipeId;
             manager.getDetailsForRecipe(recipeId, object : RecipeDetailCallback {
                 override fun onSuccess(result: RecipeDetail) {
+                    setNutritionClickListener()
                     setRecipeDetailsOnView(result)
-                    //todo: add listener for nutrition
                 }
             })
         }
@@ -94,18 +98,20 @@ class RecipeActivity : AppCompatActivity() {
         val instructionsTextView: TextView =
             findViewById(R.id.fragment_recipe_instructions_text_view)
         var instructionsText = result.instructions
-        var instructionsList = instructionsText.split("\n")
+        if (instructionsText != null) {
+            var instructionsList = instructionsText.split("\n")
 
-        var stepCounter = 0;
-        val instructionsTextSeperated: MutableList<String> =
-            instructionsList.stream()
-                .map { e ->
-                    stepCounter++
-                    return@map "Step $stepCounter \n$e";
-                }.collect(toList())
+            var stepCounter = 0;
+            val instructionsTextSeperated: MutableList<String> =
+                instructionsList.stream()
+                    .map { e ->
+                        stepCounter++
+                        return@map "Step $stepCounter \n$e";
+                    }.collect(toList())
 
-        val instructionsTextJoined: String = instructionsTextSeperated.joinToString("\n")
-        instructionsTextView.setText(instructionsTextJoined)
+            val instructionsTextJoined: String = instructionsTextSeperated.joinToString("\n")
+            instructionsTextView.setText(instructionsTextJoined)
+        }
     }
 
     fun setReadInMinutesText(result: RecipeDetail) {
@@ -133,6 +139,20 @@ class RecipeActivity : AppCompatActivity() {
         setReadInMinutesText(result)
         setRecipeImage(result)
         setRecipeTitle(result)
+    }
+
+    fun setNutritionClickListener() {
+        val nutritionButton: ImageButton = findViewById(R.id.fragment_recipe_nutrition_image_view)
+        nutritionButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                val myIntent = Intent(baseContext, NutritionActivity::class.java)
+                myIntent.putExtra("recipeId", recipeId) //Optional parameters
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                baseContext.startActivity(myIntent)
+            }
+
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

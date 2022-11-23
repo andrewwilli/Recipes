@@ -18,7 +18,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="3dp"
             tools:srcCompat="@tools:sample/avatars"
-            android:src="@drawable/ainsley"/>
+            android:icon="@drawable/ic_baseline_filter_list_24"
+            />
 
         <View
             android:layout_width="match_parent"
@@ -33,7 +34,6 @@
             android:layout_below="@+id/fragment_recipe_image_View"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="@string/recipe_title"
             app:layout_constraintTop_toBottomOf="@+id/fragment_recipe_image_View"
             tools:layout_editor_absoluteX="0dp" />
 
@@ -71,7 +71,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/ainsley"
+            android:background="@drawable/ic_baseline_access_time_24"
             android:text="Nutrition"
             android:layout_toRightOf="@+id/fragment_recipe_nutrition_text_view"
             android:layout_below="@+id/fragment_recipe_title_text_view"/>
@@ -85,7 +85,6 @@
             android:id="@+id/fragment_recipe_ready_in_minutes_text_view"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:text="@string/ready_in_15_min"
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/fragment_recipe_ready_in_minutes_image_view"
