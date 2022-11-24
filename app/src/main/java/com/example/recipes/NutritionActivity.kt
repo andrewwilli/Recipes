@@ -29,10 +29,10 @@ class NutritionActivity : AppCompatActivity() {
                     val carbsTextView: TextView = findViewById(R.id.carbsTextView)
                     val fatTextView: TextView = findViewById(R.id.fatTextView)
                     val proteinTextView: TextView = findViewById(R.id.proteinTextView)
-                    caloriesTextView.setText("Calories: ${result.calories}")
-                    carbsTextView.setText("Carbs: ${result.carbs}")
-                    fatTextView.setText("Fat: ${result.fat}")
-                    proteinTextView.setText("Protein: ${result.protein}")
+                    caloriesTextView.setText(result.calories)
+                    carbsTextView.setText(result.carbs)
+                    fatTextView.setText(result.fat)
+                    proteinTextView.setText(result.protein)
                 }
             })
         }
