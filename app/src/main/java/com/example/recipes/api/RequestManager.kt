@@ -18,7 +18,6 @@ import org.json.JSONException
 class RequestManager(context: Context) {
 
     var baseURL = "https://api.spoonacular.com/recipes/"
-    var nutritionBaseUrl = "https://api.spoonacular.com/food/products/"
     var apiKey = "68641ff6c90e4d91ac418e66cdc4533d"
     var context: Context
     val requestQueue = Volley.newRequestQueue(context)
@@ -76,7 +75,7 @@ class RequestManager(context: Context) {
         requestQueue.add(jsonObjectRequest)
     }
 
-    fun getDetailsForRecipe(recipeId: String, callback: RecipeDetailCallback){
+    fun getDetailsForRecipe(recipeId: String, callback: RecipeDetailCallback) {
         requestQueue.cancelAll("All")
         val url =
             baseURL + "$recipeId/information?includeNutrition=false&apiKey=$apiKey"
@@ -98,7 +97,7 @@ class RequestManager(context: Context) {
 
     }
 
-    fun getNutritionForRecipe(recipeId: String, callback: NutritionCallback){
+    fun getNutritionForRecipe(recipeId: String, callback: NutritionCallback) {
         requestQueue.cancelAll("All")
         val url =
             baseURL + "$recipeId/nutritionWidget.json?apiKey=$apiKey"

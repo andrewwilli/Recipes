@@ -14,14 +14,11 @@ import com.example.recipes.callbacks.RecipeCallback
 import com.example.recipes.model.Recipe
 
 
-/**
- * A fragment representing a list of Items.
- */
 class RecipeFragment : Fragment() {
 
     private var columnCount = 1
     lateinit var manager: RequestManager
-    lateinit var adapter: MyRecipeRecyclerViewAdapter
+    lateinit var adapter: RecipeRecyclerViewAdapter
     var searchString: String = ""
     var searchOffset: Int = 0
     var pageSize: Int = 5
@@ -45,17 +42,17 @@ class RecipeFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRecipeRecyclerViewAdapter(mutableListOf())
-                setAdapterReference(adapter as MyRecipeRecyclerViewAdapter)
+                adapter = RecipeRecyclerViewAdapter(mutableListOf())
+                setAdapterReference(adapter as RecipeRecyclerViewAdapter)
                 createRequestManager(container)
-                addInfiniteScrollListenerToView(view, adapter as MyRecipeRecyclerViewAdapter)
+                addInfiniteScrollListenerToView(view, adapter as RecipeRecyclerViewAdapter)
                 loadInitialData()
             }
         }
         return view
     }
 
-    private fun setAdapterReference(adapter: MyRecipeRecyclerViewAdapter) {
+    private fun setAdapterReference(adapter: RecipeRecyclerViewAdapter) {
         this.adapter = adapter
     }
 
@@ -75,7 +72,7 @@ class RecipeFragment : Fragment() {
 
     private fun addInfiniteScrollListenerToView(
         view: RecyclerView,
-        adapter: MyRecipeRecyclerViewAdapter
+        adapter: RecipeRecyclerViewAdapter
     ) {
         view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

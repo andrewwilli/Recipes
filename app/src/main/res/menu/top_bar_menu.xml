@@ -29,7 +29,7 @@
                     android:title="All" />
                 <item android:title="@string/african" />
                 <item android:title="@string/american" />
-                <item android:title="@string/britísh" />
+                <item android:title="@string/british" />
                 <item android:title="@string/cajun" />
                 <item android:title="@string/caribbean" />
                 <item android:title="@string/chinese" />
@@ -46,5 +46,4 @@
             </group>
         </menu>
     </item>
-    !-
 </menu>

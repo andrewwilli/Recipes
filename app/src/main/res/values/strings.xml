@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Reciply</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
 
     <string name="nutrition">Nutrition</string>
     <string name="title_activity_recipe">RecipeActivity</string>
@@ -11,7 +10,7 @@
     <string name="all">All</string>
     <string name="african">African</string>
     <string name="american">American</string>
-    <string name="britísh">british</string>
+    <string name="british">British</string>
     <string name="cajun">Cajun</string>
     <string name="caribbean">Caribbean</string>
     <string name="chinese">Chinese</string>
@@ -25,12 +24,13 @@
     <string name="italian">Italian</string>
     <string name="japanese">Japanese</string>
 
-    <!--    Wasnt able to find a better way for an string array, source: https://stackoverflow.com/questions/4161256/referencing-a-string-in-a-string-array-resource-with-xml-->
+    <!--    Wasnt able to find a better way for an string array that is able to be referenced by other xml and kotlin code,
+        source: https://stackoverflow.com/questions/4161256/referencing-a-string-in-a-string-array-resource-with-xml-->
     <string-array name="cuisines">
         <item>@string/all</item>
         <item>@string/african</item>
         <item>@string/american</item>
-        <item>@string/britísh</item>
+        <item>@string/british</item>
         <item>@string/cajun</item>
         <item>@string/caribbean</item>
         <item>@string/chinese</item>
@@ -44,6 +44,7 @@
         <item>@string/italian</item>
         <item>@string/japanese</item>
     </string-array>
+
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>

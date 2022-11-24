@@ -49,4 +49,5 @@ class NutritionActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

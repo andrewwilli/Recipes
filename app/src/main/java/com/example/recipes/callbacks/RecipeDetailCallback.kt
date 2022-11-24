@@ -1,6 +1,5 @@
 package com.example.recipes.callbacks
 
-import com.example.recipes.model.Recipe
 import com.example.recipes.model.RecipeDetail
 
 interface RecipeDetailCallback {

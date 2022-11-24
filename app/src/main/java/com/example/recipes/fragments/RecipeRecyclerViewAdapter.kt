@@ -1,12 +1,10 @@
 package com.example.recipes.fragments
 
-import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipes.RecipeActivity
 import com.example.recipes.databinding.FragmentItemBinding
@@ -14,12 +12,9 @@ import com.example.recipes.model.Recipe
 import com.squareup.picasso.Picasso
 
 
-/**
- * TODO: Replace the implementation with code for your data type.
- */
-class MyRecipeRecyclerViewAdapter(
+class RecipeRecyclerViewAdapter(
     private var values: MutableList<Recipe>
-) : RecyclerView.Adapter<MyRecipeRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<RecipeRecyclerViewAdapter.ViewHolder>() {
 
     lateinit var parent: ViewGroup;
 
