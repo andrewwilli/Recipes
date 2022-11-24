@@ -10,6 +10,7 @@ In the detailed recipe, there are all essential information and the important nu
 <img src="screenshot/mainscreenwithfilter.png" alt="drawing" width="250"/>
 <img src="screenshot/recipedetailview.png" alt="drawing" width="250"/>
 <img src="screenshot/recipenutritionview.png" alt="drawing" width="250"/>
+
 ## Requirements
 Minimum 13 Points are needed:
 
