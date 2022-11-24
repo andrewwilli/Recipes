@@ -1,4 +1,4 @@
-# Recipes
+# Reciply
 
 ## Description
 This is a simple mobile app for cooking enthusiast, who don't know what to cook exactly.
