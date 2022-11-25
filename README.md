@@ -1,4 +1,4 @@
-# Recipes
+# Reciply
 
 ## Description
 This is a simple mobile app for cooking enthusiast, who don't know what to cook exactly.
@@ -6,7 +6,10 @@ Therefore it will show daily random recipes. If you want specific recipes, there
 In the detailed recipe, there are all essential information and the important nutritions are shown.
 
 ## Screenshots
-
+<img src="screenshot/mainscreen.png" alt="drawing" width="250"/>
+<img src="screenshot/mainscreenwithfilter.png" alt="drawing" width="250"/>
+<img src="screenshot/recipedetailview.png" alt="drawing" width="250"/>
+<img src="screenshot/recipenutritionview.png" alt="drawing" width="250"/>
 
 ## Requirements
 Minimum 13 Points are needed:
