@@ -29,7 +29,7 @@ class RequestManager(context: Context) {
     fun getRandomRecipes(callback: RecipeCallback) {
         requestQueue.cancelAll("All")
         val url =
-            baseURL + "random?number=5&tags=vegetarian,dessert&apiKey=$apiKey"
+            baseURL + "random?number=5&apiKey=$apiKey"
         val jsonObjectRequest = JsonObjectRequest(url,
             { response ->
                 try {
